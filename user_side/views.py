@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import  TokenObtainPairView
 from rest_framework.decorators import permission_classes
 
 
-# admin register   view
+# user register   view
 
 @api_view(['POST'])
 def user_register(request):
@@ -75,7 +75,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
     
     
-# for editing user details
+# for editing user details 
 class update_user(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
     queryset=Account.objects.filter(is_admin=False)
@@ -87,7 +87,7 @@ class poster(viewsets.ModelViewSet):
     queryset=PostManagement.objects.all()
     serializer_class=PosterSerializer
     
-# for user posts
+# for user  self post
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def self_post(request):
@@ -96,7 +96,7 @@ def self_post(request):
     serializer=PosterSerializer(poster,many=True)
     return Response(serializer.data)
     
-# for user posts
+# for user visible post
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def others_post(request):
@@ -105,20 +105,3 @@ def others_post(request):
     serializer=PosterSerializer(poster,many=True)
     return Response(serializer.data)
     
-    
-@api_view(['PATCH'])    
-def change(request,id): 
-    data=request.data 
-    print(data)
-    x=data['select']     
-    x=list(map(int,x))    
-    post=PostManagement.objects.get(id=id)   
-    print(post.visibility.values)
-    print(post.visibility,'dddddd')
-    post.visibility.clear()
-    post.save()
-    for i,j in enumerate(x):       
-        post.visibility.add(j)
-        post.save()
-    serilizer=PosterSerializer(post,many=False)    
-    return Response(serilizer.data)

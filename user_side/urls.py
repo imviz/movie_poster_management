@@ -5,8 +5,9 @@ from rest_framework .routers import DefaultRouter
 
 
 router=DefaultRouter()
-# user update
+# user update 
 router.register('update',update_user,basename='update_user')
+# crud operations of Post
 router.register('poster',poster,basename='poster')
 
 urlpatterns = [
@@ -19,7 +20,7 @@ urlpatterns = [
     path('self_post/',views.self_post,name='self_post'),
     # for other  post viewing
     path('other_post/',views.others_post,name='other_post'),
-    
-    path('change/<int:id>/',views.change,name='other_post'),
+    # visibbility changing
+   
     
 ]+router.urls

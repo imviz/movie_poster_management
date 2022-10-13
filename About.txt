@@ -1,0 +1,18 @@
+in this Backend source code contain CRUD operation of user side like , poster edit and profile edit  and also registration  ,login using simple JWT
+Admin side contain CRUD operation of Poster and User ,main part is visibility control of user
+
+
+USER
+
+for registration       http://127.0.0.1:8000/user/register/
+for login              http://127.0.0.1:8000/user/login/
+for poster posting     http://127.0.0.1:8000/user/poster/
+for self poster view   http://127.0.0.1:8000/user/self_post/
+for visible post       http://127.0.0.1:8000/user/other_post/
+for profile edit       http://127.0.0.1:8000/user/update/
+
+ADMIN
+
+for user CRUD           http://127.0.0.1:8000/adminz/user/
+for poster CRUD         http://127.0.0.1:8000/adminz/poster/
+for visibility change   http://127.0.0.1:8000/adminz/change/<int:id>/
