@@ -31,8 +31,11 @@ class poster(viewsets.ModelViewSet):
 @permission_classes([IsAdminUser])
 def visibility_change(request,id): 
     data=request.data   
-    x=data['select']     
-    x=list(map(int,x))    
+    print(data,'data')
+    x=list(data['select'])     
+    print(type(x))
+    print(x)
+    x=(map(int,x))    
     post=PostManagement.objects.get(id=id)     
     post.visibility.clear()
     post.save()
