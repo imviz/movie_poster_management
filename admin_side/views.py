@@ -1,13 +1,10 @@
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAdminUser,IsAuthenticated
-from django.contrib.auth.hashers import make_password
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from user_side.models import Account,PostManagement
 from rest_framework  import status
-from  user_side.serializer import AccountSerializer,PosterSerializer
+from  user_side.serializer import AccountSerializer,PosterSerializerWithUser
 from rest_framework import viewsets
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import  TokenObtainPairView
 from rest_framework.decorators import permission_classes
 
 
@@ -22,7 +19,7 @@ class user_details(viewsets.ModelViewSet):
 class poster(viewsets.ModelViewSet):
     permission_classes=[IsAdminUser]
     queryset=PostManagement.objects.all()
-    serializer_class=PosterSerializer
+    serializer_class=PosterSerializerWithUser
     
  
     
@@ -39,5 +36,5 @@ def visibility_change(request,id):
     for i,j in enumerate(x):       
         post.visibility.add(j)
         post.save()
-    serilizer=PosterSerializer(post,many=False)    
+    serilizer=PosterSerializerWithUser(post,many=False)    
     return Response(serilizer.data)

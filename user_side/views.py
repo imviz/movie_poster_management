@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 from .models import Account,PostManagement
 from rest_framework  import status
-from .serializer import AccountSerializer,PosterSerializer
+from .serializer import AccountSerializer,PosterSerializer, PosterSerializerWithUser
 from rest_framework import viewsets
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import  TokenObtainPairView
@@ -81,6 +81,7 @@ class update_user(viewsets.ModelViewSet):
     queryset=Account.objects.filter(is_admin=False)
     serializer_class=AccountSerializer
     
+    
 # creation of poster 
 class poster(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
@@ -102,6 +103,6 @@ def self_post(request):
 def others_post(request):
     user=request.user
     poster=PostManagement.objects.filter(visibility=user)
-    serializer=PosterSerializer(poster,many=True)
+    serializer=PosterSerializerWithUser(poster,many=True)
     return Response(serializer.data)
     

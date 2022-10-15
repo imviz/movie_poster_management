@@ -7,7 +7,7 @@ from rest_framework .routers import DefaultRouter
 router=DefaultRouter()
 # user update 
 router.register('update',update_user,basename='update_user')
-# crud operations of Post
+# adding operations of Post
 router.register('poster',poster,basename='poster')
 
 urlpatterns = [

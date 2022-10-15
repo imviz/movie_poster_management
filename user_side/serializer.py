@@ -9,6 +9,13 @@ class AccountSerializer(serializers.ModelSerializer):
        
 # user details serializer
 class PosterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=PostManagement
+        fields='__all__'
+   
+    
+# user details serializer
+class PosterSerializerWithUser(serializers.ModelSerializer):
     user=AccountSerializer(many=False)
     class Meta:
         model=PostManagement
